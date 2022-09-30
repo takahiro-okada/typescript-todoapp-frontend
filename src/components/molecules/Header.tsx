@@ -1,5 +1,5 @@
 const Header = () => {
-  console.log('TEST');
+  const bool = true;
 
   return (
     <header className="py-4">
@@ -9,6 +9,7 @@ const Header = () => {
           <ul className="flex">
             <li className="px-4 font-bold text-gray-50">TODO</li>
             <li className="px-4 font-bold text-gray-50">Github</li>
+            <li className="px-4 font-bold text-gray-50">Login</li>
           </ul>
         </nav>
       </div>

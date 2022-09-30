@@ -1,5 +1,5 @@
-export type Todo = {
+export type TodoType = {
   id: number;
-  name: string;
-  price: number;
+  title: string;
+  description: string;
 };
