@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import axios from 'axios';
 import React, { ChangeEvent, useEffect, useState } from 'react';
@@ -5,21 +6,45 @@ import { TodoType } from '../../types/api/todo';
 
 const TodoList = () => {
   const [todos, setTodos] = useState<Array<TodoType>>([]);
-  const [todoText, setTodoText] = useState('');
-  const [todoDescription, setTodoDescription] = useState('');
+  const [inputTodo, setinputTodo] = useState({
+    title: '',
+    description: '',
+  });
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
+    setinputTodo({ ...inputTodo, [name]: value });
+  };
 
   const apiUrl = 'http://localhost:8080/todos/';
 
-  const data = {
-    title: todoText,
-    description: todoDescription,
-  };
+  // UPDATE
+  const editTodo = (id: number) => {
+    const targetId = todos.filter((todo) => todo.id === id);
 
-  const onChangeTodoText = (event: ChangeEvent<HTMLInputElement>) => {
-    setTodoText(event.target.value);
-  };
-  const onChangeTodoDescription = (event: ChangeEvent<HTMLInputElement>) => {
-    setTodoDescription(event.target.value);
+    if (inputTodo.title !== '') {
+      if (targetId[0].title !== inputTodo.title) {
+        targetId[0].title = inputTodo.title;
+      }
+    }
+    if (inputTodo.description !== '') {
+      if (inputTodo.description !== targetId[0].description) {
+        targetId[0].description = inputTodo.description;
+      }
+    }
+
+    const data = {
+      title: targetId[0].title,
+      description: targetId[0].description,
+    };
+
+    axios
+      .patch<TodoType>(apiUrl + id.toString(), data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
   };
 
   // GET
@@ -31,24 +56,6 @@ const TodoList = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
-  // UPDATE
-  const editTodo = (id: number) => {
-    setTodoText(todoText);
-    setTodoDescription(todoDescription);
-    axios
-      .patch<TodoType>(apiUrl + id.toString(), data)
-      .then((response) => {
-        const updateTodo = todos.map((todo) => {
-          if (todo.id === response.data.id) {
-            return response.data;
-          }
-          return todo;
-        });
-        setTodos(updateTodo);
-      })
-      .catch((error) => console.log(error));
-  };
 
   // DELETE
   const deleteTodo = (id: number) => {
@@ -68,11 +75,11 @@ const TodoList = () => {
             <div>Created Date:XXX.XX.XX</div>
             <div>
               Task:
-              <input type="text" defaultValue={todo.title} onChange={onChangeTodoText} />
+              <input type="text" name="title" defaultValue={todo.title} onChange={handleChange} />
             </div>
             <div>
               Description:
-              <input type="text" defaultValue={todo.description} onChange={onChangeTodoDescription} />
+              <input type="text" name="description" defaultValue={todo.description} onChange={handleChange} />
             </div>
 
             <button

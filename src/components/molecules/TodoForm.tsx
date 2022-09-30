@@ -1,6 +1,3 @@
-/* eslint-disable import/no-duplicates */
-// eslint-disable-next-line no-use-before-define
-
 import axios from 'axios';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { TodoType } from '../../types/api/todo';
@@ -11,13 +8,12 @@ const TodoForm = () => {
   const [todoDescription, setTodoDescription] = useState('');
 
   const [todos, setTodos] = useState<Array<TodoType>>([]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const data = {
-    title: todoText,
-    description: todoDescription,
-  };
 
-  const addTodo: any = useCallback(() => {
+  const addTodo = useCallback(() => {
+    const data = {
+      title: todoText,
+      description: todoDescription,
+    };
     axios
       .post<TodoType>(apiUrl, data)
       .then((response) => {
@@ -26,7 +22,7 @@ const TodoForm = () => {
       .catch((error) => {
         console.log(error.status);
       });
-  }, [data, todos]);
+  }, [todoText, todoDescription, todos]);
 
   const onChangeTodoText = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoText(event.target.value);
