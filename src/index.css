@@ -1,3 +1,14 @@
+/* tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* font */
+@font-face {
+  font-family: 'bananaslip';
+  src: url('./fonts/banana//bananaslipplus.otf') format('truetype');
+}
+
+html {
+  font-family: bananaslip;
+}
