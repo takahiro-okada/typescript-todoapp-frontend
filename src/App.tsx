@@ -1,6 +1,6 @@
 import Footer from './components/molecules/Footer';
 import Header from './components/molecules/Header';
-import TechStack from './components/molecules/TechStack';
+import TodoDones from './components/molecules/TodoDones';
 import TodoForm from './components/molecules/TodoForm';
 import TodoList from './components/molecules/TodoList';
 
@@ -9,11 +9,13 @@ const App = () => (
     <Header />
 
     <main className="container mx-auto mt-6">
-      <TechStack />
+      {/* <TechStack /> */}
 
       <TodoForm />
 
       <TodoList />
+
+      <TodoDones />
     </main>
     <Footer />
   </div>

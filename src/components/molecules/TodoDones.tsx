@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { TodoType } from '../../types/api/todo';
 
-const TodoList = () => {
+const TodoDones = () => {
   const [todos, setTodos] = useState<Array<TodoType>>([]);
   const [inputTodo, setinputTodo] = useState({
     title: '',
@@ -69,6 +69,7 @@ const TodoList = () => {
 
   return (
     <div className="mt-10">
+      <h2 className="text-white">Done!!</h2>
       <ul className="text-left grid grid-cols-4 gap-4 ">
         {todos.map((todo) => (
           <li className="rounded-2xl px-4 py-4 bg-white" key={todo.id}>
@@ -103,4 +104,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default TodoDones;

@@ -1,6 +1,3 @@
-/* eslint-disable import/no-duplicates */
-// eslint-disable-next-line no-use-before-define
-
 import axios from 'axios';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { TodoType } from '../../types/api/todo';
@@ -11,13 +8,12 @@ const TodoForm = () => {
   const [todoDescription, setTodoDescription] = useState('');
 
   const [todos, setTodos] = useState<Array<TodoType>>([]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const data = {
-    title: todoText,
-    description: todoDescription,
-  };
 
-  const addTodo: any = useCallback(() => {
+  const addTodo = useCallback(() => {
+    const data = {
+      title: todoText,
+      description: todoDescription,
+    };
     axios
       .post<TodoType>(apiUrl, data)
       .then((response) => {
@@ -26,7 +22,7 @@ const TodoForm = () => {
       .catch((error) => {
         console.log(error.status);
       });
-  }, [data, todos]);
+  }, [todoText, todoDescription, todos]);
 
   const onChangeTodoText = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoText(event.target.value);
@@ -39,12 +35,22 @@ const TodoForm = () => {
     <div className="mt-5 text-left">
       <form>
         <p className="font-bold text-gray-50">Task</p>
-        <input type="text" className="bg-white" defaultValue={todoText} onChange={onChangeTodoText} />
+        <input
+          type="text"
+          className="bg-white rounded-md w-6/12 text-xl px-3 py-3"
+          defaultValue={todoText}
+          onChange={onChangeTodoText}
+        />
         <p className="font-bold text-gray-50 py0">Description</p>
-        <input type="text" className="bg-white" defaultValue={todoDescription} onChange={onChangeTodoDescription} />
+        <input
+          type="text"
+          className="bg-white rounded-md w-6/12 text-xl px-3 py-3"
+          defaultValue={todoDescription}
+          onChange={onChangeTodoDescription}
+        />
         <button
           type="submit"
-          className="mt-5 block text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
+          className="mt-5 block text-white  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           onClick={addTodo}
         >
