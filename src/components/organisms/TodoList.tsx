@@ -68,37 +68,39 @@ const TodoList = () => {
   };
 
   return (
-    <div className="mt-10">
-      <ul className="text-left grid grid-cols-4 gap-4 ">
-        {todos.map((todo) => (
-          <li className="rounded-2xl px-4 py-4 bg-white" key={todo.id}>
-            <div>Created Date:XXX.XX.XX</div>
-            <div>
-              Task:
-              <input type="text" name="title" defaultValue={todo.title} onChange={handleChange} />
-            </div>
-            <div>
-              Description:
-              <input type="text" name="description" defaultValue={todo.description} onChange={handleChange} />
-            </div>
+    <div className="container mx-auto flex justify-between items-center">
+      <div className="mt-10">
+        <ul className="text-left grid grid-cols-4 gap-4 ">
+          {todos.map((todo) => (
+            <li className="rounded-2xl px-4 py-4 bg-white" key={todo.id}>
+              <div>Created Date:XXX.XX.XX</div>
+              <div>
+                Task:
+                <input type="text" name="title" defaultValue={todo.title} onChange={handleChange} />
+              </div>
+              <div>
+                Description:
+                <input type="text" name="description" defaultValue={todo.description} onChange={handleChange} />
+              </div>
 
-            <button
-              type="button"
-              className="font-bold mt-3 block text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
-              onClick={() => deleteTodo(todo.id)}
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              className="font-bold mt-3 block text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
-              onClick={() => editTodo(todo.id)}
-            >
-              Edit
-            </button>
-          </li>
-        ))}
-      </ul>
+              <button
+                type="button"
+                className="font-bold mt-3 block text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
+                onClick={() => deleteTodo(todo.id)}
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                className="font-bold mt-3 block text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
+                onClick={() => editTodo(todo.id)}
+              >
+                Edit
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

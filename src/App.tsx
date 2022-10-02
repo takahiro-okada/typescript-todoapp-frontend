@@ -9,7 +9,7 @@ import NotFound from './components/pages/NotFound';
 
 const App = () => (
   <BrowserRouter>
-    <div className="App bg-zinc-900">
+    <div className="App bg-zinc-900 px-5">
       <Header />
       <Routes>
         <Route index element={<Main />} />
