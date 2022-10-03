@@ -79,7 +79,7 @@ const TodoList = () => {
           </div>
           <div className="rounded-tr-md text-white bg-gray-500 text-xl w-6/12 text-center py-3">Done Todos</div>
         </div>
-        <ul className="text-left grid grid-cols-4 gap-4 px-8 mt-10">
+        <ul className="text-left grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 px-8 mt-10">
           {todos.map((todo) => (
             <li className="rounded-2xl px-4 py-4 bg-neutral-700 rounded-md shadow-md shadow-white" key={todo.id}>
               <div className="text-white">Created Date:XXX.XX.XX</div>
