@@ -6,6 +6,7 @@ import { Register } from './components/pages/Register';
 import Header from './components/organisms/Header';
 import Footer from './components/organisms/Footer';
 import NotFound from './components/pages/NotFound';
+import { Mypage } from './components/pages/Mypage';
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const App = () => (
         <Route index element={<Main />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="mypage" element={<Mypage />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       <Footer />
