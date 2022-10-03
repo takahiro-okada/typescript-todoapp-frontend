@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import axios from 'axios';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TodoType } from '../../types/api/todo';
+import { DeleteButton } from '../atoms/DeleteButton';
+import { UpdateButton } from '../atoms/UpdateButton';
 
 const TodoList = () => {
   const [todos, setTodos] = useState<Array<TodoType>>([]);
@@ -10,7 +13,7 @@ const TodoList = () => {
     title: '',
     description: '',
   });
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: any) => {
     const { target } = event;
     const { value } = target;
     const { name } = target;
@@ -69,34 +72,46 @@ const TodoList = () => {
 
   return (
     <div className="container mx-auto flex justify-between items-center">
-      <div className="mt-10">
-        <ul className="text-left grid grid-cols-4 gap-4 ">
+      <div className="mt-10 w-full bg-neutral-800 pb-16 rounded-lg">
+        <div className="flex">
+          <div className="rounded-tl-md text-white w-6/12 text-center py-3 bg-orange-600 text-xl bg-gradient-to-r from-[#FF512F] to-[#F09819]">
+            Your Todos
+          </div>
+          <div className="rounded-tr-md text-white bg-gray-500 text-xl w-6/12 text-center py-3">Done Todos</div>
+        </div>
+        <ul className="text-left grid grid-cols-4 gap-4 px-8 mt-10">
           {todos.map((todo) => (
-            <li className="rounded-2xl px-4 py-4 bg-white" key={todo.id}>
-              <div>Created Date:XXX.XX.XX</div>
+            <li className="rounded-2xl px-4 py-4 bg-neutral-700 rounded-md shadow-md shadow-white" key={todo.id}>
+              <div className="text-white">Created Date:XXX.XX.XX</div>
               <div>
-                Task:
-                <input type="text" name="title" defaultValue={todo.title} onChange={handleChange} />
+                <label htmlFor="task" className="text-white">
+                  Task
+                  <input
+                    className="block rounded-md  px-2 py-2 text-black w-full"
+                    id="task"
+                    type="text"
+                    name="title"
+                    defaultValue={todo.title}
+                    onChange={handleChange}
+                  />
+                </label>
               </div>
               <div>
-                Description:
-                <input type="text" name="description" defaultValue={todo.description} onChange={handleChange} />
+                <label htmlFor="description" className="text-white">
+                  Description
+                  <textarea
+                    className="block rounded-md  px-2 py-2 text-black w-full"
+                    id="description"
+                    name="description"
+                    defaultValue={todo.description}
+                    onChange={handleChange}
+                  />
+                </label>
               </div>
-
-              <button
-                type="button"
-                className="font-bold mt-3 block text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
-                onClick={() => deleteTodo(todo.id)}
-              >
-                Delete
-              </button>
-              <button
-                type="button"
-                className="font-bold mt-3 block text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
-                onClick={() => editTodo(todo.id)}
-              >
-                Edit
-              </button>
+              <div className="grid grid-cols-2 gap-3 mt-6">
+                <UpdateButton title="Update" onClick={() => editTodo(todo.id)} />
+                <DeleteButton title="Delete" onClick={() => deleteTodo(todo.id)} />
+              </div>
             </li>
           ))}
         </ul>

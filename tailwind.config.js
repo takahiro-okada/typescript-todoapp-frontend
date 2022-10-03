@@ -6,9 +6,8 @@ module.exports = {
       fontFamily: {
         bananaslip: ['bananaslip'],
       },
-      backgroundColor: {
-        button_gradient_left: '#FF512F',
-        button_gradient_right: '#F09819',
+      colors: {
+        bgblack: '#323034',
       },
     },
   },

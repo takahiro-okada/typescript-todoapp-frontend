@@ -7,6 +7,9 @@ import { FormPasswordInput } from '../molecules/FormPasswordInput';
 export const Register: React.VFC = () => {
   console.log('hoge');
 
+  const signin = () => {
+    alert('sign in!!!');
+  };
   return (
     <div className="container mx-auto max-w-lg">
       <div className="flex justify-center">
@@ -16,7 +19,7 @@ export const Register: React.VFC = () => {
         <FormEmailInput />
         <FormPasswordInput />
         <div className="mt-10">
-          <Button title="Sign in" />
+          <Button title="Sign in" onClick={signin} />
         </div>
         <div className="mt-5 text-white flex justify-end">
           <Link to="/login">Login</Link>

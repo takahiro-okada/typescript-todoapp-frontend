@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { TodoType } from '../../types/api/todo';
+import { Button } from '../atoms/Button';
 
 const TodoForm = () => {
   const apiUrl = 'http://localhost:8080/todos';
@@ -27,36 +28,30 @@ const TodoForm = () => {
   const onChangeTodoText = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoText(event.target.value);
   };
-  const onChangeTodoDescription = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeTodoDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setTodoDescription(event.target.value);
   };
 
   return (
-    <div className="container mx-auto flex justify-between items-center">
-      <div className="mt-5 text-left">
+    <div className="container mx-auto flex justify-between items-center w-2/4">
+      <div className="mt-5 text-left w-full">
         <form>
-          <p className="font-bold text-gray-50">Task</p>
+          <p className="font-bold text-gray-50 text-2xl">Task</p>
           <input
             type="text"
-            className="bg-white rounded-md w-6/12 text-xl px-3 py-3"
+            className="bg-neutral-700 rounded-md mt-3 text-xl px-3 py-3 w-full md:w-3/4 text-white"
             defaultValue={todoText}
             onChange={onChangeTodoText}
           />
-          <p className="font-bold text-gray-50 py0">Description</p>
-          <input
-            type="text"
-            className="bg-white rounded-md w-6/12 text-xl px-3 py-3"
+          <p className="font-bold text-gray-50 py0 mt-8 text-2xl">Description</p>
+          <textarea
+            className="bg-neutral-700 rounded-md mt-3 text-xl px-3 py-3 w-full md:w-3/4 text-white"
             defaultValue={todoDescription}
             onChange={onChangeTodoDescription}
           />
-          <button
-            type="submit"
-            className="mt-5 block text-white  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            onClick={addTodo}
-          >
-            Submit
-          </button>
+          <div className="mt-10 w-full md:w-3/4">
+            <Button title="Submit" onClick={addTodo} />
+          </div>
         </form>
       </div>
     </div>
