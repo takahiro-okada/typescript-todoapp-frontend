@@ -7,8 +7,12 @@ export const Mypage = () => {
         <h2 className="mt-14 text-white text-3xl">My page</h2>
       </div>
       <div className="mt-10">
-        <div className="mt-5 flex align-middle justify-center">
-          <img src="https://okalog.info/wp-content/uploads/2020/11/oka.png" alt="" />
+        <div className="mt-5 flex justify-center">
+          <img
+            className="object-cover rounded-full  w-28 h-28"
+            src="https://okalog.info/wp-content/uploads/2020/11/oka.png"
+            alt=""
+          />
         </div>
         <div className="block mt-8">
           <dl className="text-white block text-2xl">
