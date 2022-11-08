@@ -19,6 +19,7 @@ const TodoForm = () => {
       .post<TodoType>(apiUrl, data)
       .then((response) => {
         setTodos([...todos, response.data]);
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error.status);

@@ -24,10 +24,6 @@ const TodoDones = () => {
     axios
       .get<Array<TodoType>>(apiUrl)
       .then((response) => {
-        console.log("hoge");
-
-        console.log(response.data);
-        
         setTodos(response.data);
       })
       .catch((error) => console.log(error));
