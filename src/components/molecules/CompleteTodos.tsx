@@ -5,27 +5,23 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useAllTodos } from '../../hooks/userAllTodos';
 import { ReverseButton } from '../atoms/ReverseButton';
-import { UpdateButton } from '../atoms/UpdateButton';
 import { TodoType } from '../../types/api/todo';
 
 
 const CompleteTodos = () => {  
-  const {allTodos,completeTodos,deleteTodo,onClickReverseTodo} = useAllTodos();
+  const {allTodos,completeTodos,deleteTodo,onClickReverseTodo,setAllTodos} = useAllTodos();
+  const apiUrl = 'http://localhost:8080/todos/';
+
   const [inputTodo, setinputTodo] = useState({
     title: '',
     description: '',
   });
-  const handleChange = (event: any) => {
+  const handleChange = (event: any, id:number) => {
     const { target } = event;
     const { value } = target;
     const { name } = target;
     setinputTodo({ ...inputTodo, [name]: value });
-  };
 
-  const apiUrl = 'http://localhost:8080/todos/';
-
-  // UPDATE
-  const editTodo = (id: number) => {
     const targetId = allTodos.filter((todo) => todo.id === id);
 
     if (inputTodo.title !== '') {
@@ -42,15 +38,17 @@ const CompleteTodos = () => {
     const data = {
       title: targetId[0].title,
       description: targetId[0].description,
+      isCompleted: true
     };
     
     axios
       .patch<TodoType>(apiUrl + id.toString(), data)
       .then((response) => {
-        window.location.reload();
+        console.log(response);
       })
       .catch((error) => console.log(error));
   };
+
   return(
     <div className="list-none text-left grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 px-8 mt-10">
         {completeTodos.map((todo) => (
@@ -75,7 +73,8 @@ const CompleteTodos = () => {
                   type="text"
                   name="title"
                   defaultValue={todo.title}
-                  onChange={handleChange}
+                  onChange={(event)=>handleChange(event,todo.id)}
+
                 />
               </label>
             </div>
@@ -87,12 +86,11 @@ const CompleteTodos = () => {
                   id="description"
                   name="description"
                   defaultValue={todo.description}
-                  onChange={handleChange}
+                  onChange={(event)=>handleChange(event,todo.id)}
                 />
               </label>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-6">
-              <UpdateButton title="Update" onClick={() => editTodo(todo.id)} />
+            <div className="mt-6">
               <ReverseButton title="Revert" onClick={() => onClickReverseTodo(todo)} />
             </div>
           </li>

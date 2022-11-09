@@ -5,27 +5,23 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useAllTodos } from '../../hooks/userAllTodos';
 import { CompetedButton } from '../atoms/CompetedButton';
-import { UpdateButton } from '../atoms/UpdateButton';
 import { TodoType } from '../../types/api/todo';
 
 
-const YourTodos = () => {  
+const InCompleteTodos = () => {  
   const {allTodos,incompleteTodos,deleteTodo,onClickCompeteTodo} = useAllTodos();
+  const apiUrl = 'http://localhost:8080/todos/';
+
   const [inputTodo, setinputTodo] = useState({
     title: '',
     description: '',
   });
-  const handleChange = (event: any) => {
+  const handleChange = (event: any, id:number) => {
     const { target } = event;
     const { value } = target;
     const { name } = target;
     setinputTodo({ ...inputTodo, [name]: value });
-  };
 
-  const apiUrl = 'http://localhost:8080/todos/';
-
-  // UPDATE
-  const editTodo = (id: number) => {
     const targetId = allTodos.filter((todo) => todo.id === id);
 
     if (inputTodo.title !== '') {
@@ -42,12 +38,13 @@ const YourTodos = () => {
     const data = {
       title: targetId[0].title,
       description: targetId[0].description,
+      isCompleted: false
     };
-    
+
     axios
       .patch<TodoType>(apiUrl + id.toString(), data)
       .then((response) => {
-        window.location.reload();
+
       })
       .catch((error) => console.log(error));
   };
@@ -76,7 +73,7 @@ const YourTodos = () => {
                 type="text"
                 name="title"
                 defaultValue={todo.title}
-                onChange={handleChange}
+                onChange={(event)=>handleChange(event,todo.id)}
               />
             </label>
           </div>
@@ -88,12 +85,11 @@ const YourTodos = () => {
                 id="description"
                 name="description"
                 defaultValue={todo.description}
-                onChange={handleChange}
+                onChange={(event)=>handleChange(event,todo.id)}
               />
             </label>
           </div>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <UpdateButton title="Update" onClick={() => editTodo(todo.id)} />
+          <div className="mt-6">
             <CompetedButton title="Done" onClick={() => onClickCompeteTodo(todo)} />
           </div>
         </li>
@@ -102,4 +98,4 @@ const YourTodos = () => {
   )
 }
 
-export default YourTodos;
+export default InCompleteTodos;

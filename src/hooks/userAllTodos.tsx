@@ -69,6 +69,6 @@ export const useAllTodos = () => {
   const completeTodosLength = completeTodos.length;  
 
   return{
-    allTodos,incompleteTodos,completeTodos,deleteTodo,onClickCompeteTodo,onClickReverseTodo,incompleteTodosLength,completeTodosLength
+    allTodos,incompleteTodos,completeTodos,deleteTodo,onClickCompeteTodo,onClickReverseTodo,incompleteTodosLength,completeTodosLength,setAllTodos
   };
 }

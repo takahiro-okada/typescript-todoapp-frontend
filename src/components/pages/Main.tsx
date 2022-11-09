@@ -5,7 +5,7 @@ import CountTodo from '../molecules/CountTodos';
 
 export const Main: React.VFC = () => (
     <>
-      <div className="container mx-auto flex">
+      <div className="container mx-auto  md:flex">
         <TodoForm />
         <CountTodo />
       </div>

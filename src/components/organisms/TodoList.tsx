@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import YourTodos from '../molecules/YourTodos';
+import InCompleteTodos from '../molecules/InCompleteTodos';
 import CompleteTodos from '../molecules/CompleteTodos';
 
 
@@ -20,7 +20,7 @@ const TodoList = () => (
           </TabList>
           
           <TabPanel>
-            <YourTodos/>
+            <InCompleteTodos/>
           </TabPanel>
 
           <TabPanel>

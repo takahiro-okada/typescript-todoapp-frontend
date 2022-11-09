@@ -34,7 +34,7 @@ const TodoForm = () => {
   };
 
   return (
-    <div className="container mx-auto flex justify-between items-center w-2/4">
+    <div className="container mx-auto flex justify-between items-center md:w-2/4">
       <div className="mt-5 text-left w-full">
         <form>
           <p className="font-bold text-gray-50 text-2xl">Task</p>
