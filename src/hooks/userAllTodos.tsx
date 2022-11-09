@@ -59,13 +59,16 @@ export const useAllTodos = () => {
     .catch((error) => console.log(error));
   }
 
+
+  // Todo Array
   const incompleteTodos = allTodos.filter((output)=> output.isCompleted === false);
   const completeTodos = allTodos.filter((output)=> output.isCompleted === true);
 
+  // Todo Length
   const incompleteTodosLength = incompleteTodos.length;
   const completeTodosLength = completeTodos.length;  
 
   return{
-    incompleteTodos,completeTodos,deleteTodo,onClickCompeteTodo,onClickReverseTodo,incompleteTodosLength,completeTodosLength
+    allTodos,incompleteTodos,completeTodos,deleteTodo,onClickCompeteTodo,onClickReverseTodo,incompleteTodosLength,completeTodosLength
   };
 }

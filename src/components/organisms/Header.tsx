@@ -10,7 +10,7 @@ const Header = () => (
             <Link to="/">TODO</Link>
           </li>
           <li className="px-2 mb:px-4 font-bold text-gray-50">
-            <Link to="/">Github</Link>
+            <a href="https://github.com/takahiro-okada/typescript-todoapp-frontend" target="_blank" rel="noreferrer">Github</a>
           </li>
           <li className="px-2 mb:px-4 font-bold text-gray-50">
             <Link to="/login">Login</Link>
