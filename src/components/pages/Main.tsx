@@ -1,20 +1,14 @@
 import React from 'react';
 import TodoForm from '../organisms/TodoForm';
 import TodoList from '../organisms/TodoList';
+import CountTodo from '../molecules/CountTodos';
 
-export const Main: React.VFC = () => {
-  console.log('hoge');
-
-  return (
+export const Main: React.VFC = () => (
     <>
-      <div className="container mx-auto flex">
+      <div className="container mx-auto  md:flex">
         <TodoForm />
-        <div className="w-2/4">
-          <div className="text-white text-xl">You have 10 Todos.</div>
-          <div className="text-white text-xl mt-5">You have done 5 Todos.</div>
-        </div>
+        <CountTodo />
       </div>
       <TodoList />
     </>
   );
-};
