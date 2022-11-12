@@ -9,7 +9,7 @@ import { TodoType } from '../../types/api/todo';
 
 
 const CompleteTodos = () => {  
-  const {allTodos,completeTodos,deleteTodo,onClickReverseTodo,setAllTodos} = useAllTodos();
+  const {allTodos,completeTodos,deleteTodo,onClickReverseTodo} = useAllTodos();
   const apiUrl = 'http://localhost:8080/todos/';
 
   const [inputTodo, setinputTodo] = useState({
@@ -54,7 +54,7 @@ const CompleteTodos = () => {
         {completeTodos.map((todo) => (
           <li className="rounded-2xl px-4 py-4 bg-neutral-700 rounded-md shadow-md shadow-white" key={todo.id}>
             <div className="flex justify-between">
-            <div className="text-white">Created Date:XXX.XX.XX</div>
+            <div className="text-white">Created Date:{todo.createdAt}</div>
               <button 
                   type="submit"
                   onClick={() => deleteTodo(todo.id)}

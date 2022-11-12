@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import axios from 'axios';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useAllTodos } from '../../hooks/userAllTodos';
 import { CompetedButton } from '../atoms/CompetedButton';
 import { TodoType } from '../../types/api/todo';
@@ -44,7 +45,7 @@ const InCompleteTodos = () => {
     axios
       .patch<TodoType>(apiUrl + id.toString(), data)
       .then((response) => {
-
+        toast.success('Todoを更新しました')
       })
       .catch((error) => console.log(error));
   };
@@ -54,7 +55,7 @@ const InCompleteTodos = () => {
       {incompleteTodos.map((todo) => (
         <li className="rounded-2xl px-4 py-4 bg-neutral-700 rounded-md shadow-md shadow-white" key={todo.id}>
           <div className="flex justify-between">
-          <div className="text-white">Created Date:XXX.XX.XX</div>
+          <div className="text-white">Created Date:{todo.createdAt}</div>
             <button 
                 type="submit"
                 onClick={() => deleteTodo(todo.id)}
@@ -76,7 +77,7 @@ const InCompleteTodos = () => {
                 onChange={(event)=>handleChange(event,todo.id)}
               />
             </label>
-          </div>
+          </div>        
           <div>
             <label htmlFor="description" className="text-white">
               Description
