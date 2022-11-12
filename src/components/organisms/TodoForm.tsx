@@ -16,10 +16,10 @@ const TodoForm = () => {
       description: todoDescription,
     };
     axios
-      .post<TodoType>(apiUrl, data)
-      .then((response) => {
+    .post<TodoType>(apiUrl, data)
+    .then((response) => {
         setTodos([...todos, response.data]);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         console.log(error.status);

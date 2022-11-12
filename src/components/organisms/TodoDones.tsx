@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import axios from 'axios';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { TodoType } from '../../types/api/todo';
 
 const TodoDones = () => {
@@ -17,7 +17,18 @@ const TodoDones = () => {
     setinputTodo({ ...inputTodo, [name]: value });
   };
 
-  const apiUrl = 'http://localhost:8080/todos/';
+  const apiUrl = 'http://localhost:8080/todos/'
+
+  const fetchTodos: any = useCallback(() => {
+    axios
+      .get<Array<TodoType>>(apiUrl)
+      .then((result) => {
+        setTodos(() => result.data);
+      })
+      .catch((error) => {
+        console.log(error.status);
+      });
+  }, []);
 
   // GET
   useEffect(() => {
@@ -62,18 +73,17 @@ const TodoDones = () => {
     axios
       .delete<TodoType>(apiUrl + id.toString())
       .then((response) => {
-        setTodos(todos.filter((todo) => todo.id !== id));
+        console.log(response);
       })
       .catch((error) => console.log(error));
   };
-
   return (
     <div className="mt-10">
       <h2 className="text-white">Done!!</h2>
       <ul className="text-left grid grid-cols-4 gap-4 ">
         {todos.map((todo) => (
           <li className="rounded-2xl px-4 py-4 bg-white" key={todo.id}>
-            <div>Created Date:XXX.XX.XX</div>
+            <div>Created Date:{todo.createdAt}</div>
             <div>
               Task:
               <input type="text" name="title" defaultValue={todo.title} onChange={handleChange} />
